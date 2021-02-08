@@ -95,6 +95,15 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void zeroRed() {
+		Pixel[][] pixels = this.getPixels2D();
+		for (Pixel[] rowArray : pixels) {
+			for (Pixel pixelObj : rowArray) {
+				pixelObj.setRed(0);
+			}
+		}
+	}
+
 	/**
 	 * Method that mirrors the picture around a vertical mirror in the center of
 	 * the picture from left to right
@@ -200,6 +209,48 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void grayscale() {
+
+		Pixel[][] picGrid = this.getPixels2D();
+		Pixel current = null;
+		int sum = 0;
+		int mean = 0;
+		for( int row = 0; row < picGrid.length; row++ ) {
+			for( int col = 0; col < picGrid[0].length; col++ ) {
+				current = picGrid[ row ][ col ];
+				sum = current.getRed() + current.getGreen() + current.getBlue();
+				mean = sum / 3;
+				current.setColor( new Color( mean, mean, mean ) );
+			}
+		}
+
+	}
+
+	public void negate() {
+		Pixel[][] picGrid = this.getPixels2D();
+		Pixel current = null;
+		for (int row = 0; row < picGrid[0].length; row++) {
+			for (int col = 0; col < picGrid[0].length; col++) {
+				current = picGrid[row][col];
+				current.setRed(255-current.getRed());
+				current.setBlue(255-current.getBlue());
+				current.setGreen(255-current.getGreen());
+			}
+		}
+	}
+
+	public void keepOnlyBlue() {
+
+		Pixel[][] picGrid = this.getPixels2D();
+		for( int row = 0; row < picGrid.length; row++ ) {
+			for( int col = 0; col < picGrid[0].length; col++ ) {
+				picGrid[ row ][ col ].setRed( 0 );
+				picGrid[ row ][ col ].setGreen( 0 );
+			}
+		}
+
+	}
+
 	/*
 	 * Main method for testing - each class in Java can have a main method
 	 */
@@ -207,6 +258,7 @@ public class Picture extends SimplePicture {
 		Picture beach = new Picture("beach.jpg");
 		beach.explore();
 		beach.zeroBlue();
+		beach.zeroRed();
 		beach.explore();
 	}
 
