@@ -75,6 +75,21 @@ public class PictureTester
     swan.edgeDetection(10);
     swan.explore();
   }
+
+  public static void testMirrorHorizontal() {
+    Picture beach = new Picture("swan.jpg");
+    beach.explore();
+    beach.mirrorHorizontal();
+    beach.explore();
+  }
+
+  public static void testMirrorHorizontalBottomtoTop() {
+    Picture beach = new Picture("swan.jpg");
+    beach.explore();
+    beach.mirrorHorizontal();
+    beach.explore();
+  }
+
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -83,16 +98,19 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
+    // testZeroBlue();
     // testZeroRed();
-    testKeepOnlyBlue();
+    // testKeepOnlyBlue();
     // testKeepOnlyRed();
     // testKeepOnlyGreen();
-    testNegate();
-    testGrayscale();
+    // testNegate();
+    // testGrayscale();
     // testFixUnderwater();
-    testMirrorVertical();
-    testMirrorTemple();
+    // testMirrorVertical();
+    // testMirrorVerticalRighttoLeft();
+    // testMirrorHorizontal();
+    testMirrorHorizontalBottomtoTop();
+    // testMirrorTemple();
     // testMirrorArms();
     // testMirrorGull();
     // testMirrorDiagonal();
