@@ -412,7 +412,7 @@ public class Picture extends SimplePicture {
 	}
 
 	public void mirrorGull() {
-		int mirrorPoint = 350;
+		int mirrorPoint = 400; // 350
 		Pixel leftPixel = null;
 		Pixel rightPixel = null;
 		Pixel[][] pixels = this.getPixels2D();
@@ -425,10 +425,7 @@ public class Picture extends SimplePicture {
 				rightPixel.setColor(leftPixel.getColor());
 	 		}	
 		}
-		 // this one is interesting because even
-		// though it mirrored only the seagull,
-		// the light color from the left side of the
-		// picture tranfered over to the right side as well.
+		 
 	}
 	
 

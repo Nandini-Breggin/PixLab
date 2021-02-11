@@ -50,6 +50,14 @@ public class PictureTester
     caterpillar.mirrorVertical();
     caterpillar.explore();
   }
+
+  public static void testMirrorDiagonal()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorDiagonal();
+    caterpillar.explore();
+  }
   
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
@@ -126,10 +134,10 @@ public class PictureTester
 
   public static void testMirrorGull() {
 
-    Picture beach = new Picture("seagull.jpg");
-    beach.explore();
-    beach.mirrorGull();
-    beach.explore();
+    Picture seagull = new Picture("seagull.jpg");
+    seagull.explore();
+    seagull.mirrorGull();
+    seagull.explore();
 
   }
 
@@ -141,6 +149,7 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
+    testMirrorGull();
     // testZeroBlue();
     // testZeroRed();
     // testKeepOnlyBlue();
@@ -155,16 +164,15 @@ public class PictureTester
     // testMirrorHorizontalBottomtoTop();
     // testMirrorTemple();
     // testMirrorArms();
-    // testMirrorGull();
     // testMirrorDiagonal();
     // testCollage();
     // testMyCollage();
-    // testCopy();
-    testEdgeDetection();
+    // testCopy(); 
+    // testEdgeDetection();
     // testEdgeVertical();
     // testEdgeDiagonal();
-    testEdgeDetection2();
-    testEdgeDetection3();
+    // testEdgeDetection2();
+    // testEdgeDetection3();
     // testChromakey();
     // testEncodeAndDecode();
     // testGetCountRedOverValue(250);
