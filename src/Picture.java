@@ -170,6 +170,20 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void copy( Picture fromPic, int startRowFrom, int startColFrom, int endRowFrom, int endColFrom, int copyToRow, int copyToCol ) {
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+		for (int fromRow = startRowFrom, toRow = copyToRow; fromRow <= endRowFrom && toRow < toPixels.length; fromRow++, toRow++ ) {
+			for (int fromCol = startColFrom, toCol = copyToCol; fromCol <= endColFrom && toCol < toPixels[ 0 ].length; fromCol++, toCol++ ) {
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	}
+
 	/** Method to create a collage of several pictures */
 	public void createCollage() {
 		Picture flower1 = new Picture("flower1.jpg");
@@ -184,6 +198,22 @@ public class Picture extends SimplePicture {
 		this.copy(flower2, 500, 0);
 		this.mirrorVertical();
 		this.write("collage.jpg");
+	}
+
+	public void myCollage() {
+		Picture seagull = new Picture("seagull.jpg");
+		Picture flower1 = new Picture("flower1.jpg");
+		Picture caterpillar = new Picture("caterpillar.jpg");
+		
+		seagull.grayscale();
+		flower1.mirrorVertical();
+		caterpillar.mirrorHorizontalBottomtoTop();
+
+		this.copy( caterpillar, 0, 0 );
+		this.copy( flower1, 100, 0 );
+		this.copy( caterpillar, 200, 0 );
+		this.mirrorHorizontal();
+		this.mirrorVertical();
 	}
 
 	/**
@@ -243,28 +273,28 @@ public class Picture extends SimplePicture {
 	public void keepOnlyBlue() {
 
 		Pixel[][] picGrid = this.getPixels2D();
-		for( int row = 0; row < picGrid.length; row++ ) {
-			for( int col = 0; col < picGrid[0].length; col++ ) {
-				picGrid[ row ][ col ].setRed( 0 );
-				picGrid[ row ][ col ].setGreen( 0 );
+		for (int row = 0; row < picGrid.length; row++) {
+			for (int col = 0; col < picGrid[0].length; col++) {
+				picGrid[row][col].setRed(0);
+				picGrid[row][col].setGreen(0);
 			}
 		}
 
 	}
 
 	public void mirrorVerticalRightToLeft() {
-		Pixel[][] pixels = this.getPixels2D();
+		Pixel[][] pixels = this.getPixels2D(); // Declare 2D array
 		Pixel leftPixel = null;
 		Pixel rightPixel = null;
-		int width = pixels[ 0 ].length;
+		int width = pixels[0].length; // gets the number of the column
 
 		// loop through the rows
 		for (int row = 0; row < pixels.length; row++) {
 			for (int col = 0; col < (width / 2); col++) {
 
-				leftPixel = pixels[row][col];
-				rightPixel = pixels[row][width - col - 1];
-				leftPixel.setColor(rightPixel.getColor());
+				leftPixel = pixels[row][col]; // setting value of element
+				rightPixel = pixels[row][width - col - 1]; // setting value of element width of image-column-1 to reverse
+				leftPixel.setColor(rightPixel.getColor()); // setting the color to mirror based on the colums/rows before
 			}
 		}
 	}
@@ -295,44 +325,70 @@ public class Picture extends SimplePicture {
 		}
 	}
 
-	public void mirrorArms() {
+	public void mirrorDiagonal() {
+
 		Pixel[][] pixels = this.getPixels2D();
-		Pixel top = null;
-		Pixel bottom = null;
+		Pixel left = null;
+		Pixel right = null;
 
-		for (int row = 160; row < 200; row++) {
-			for (int col = 100; col < 170; col++) {
-				top = pixels[row][col];
-				bottom = pixels[200 - row + 200][col];
-				top.setColor((top.getColor()));
+		int max = pixels.length;
+
+		if (pixels[ 0 ].length < max ) {
+			max = pixels[ 0 ].length;
+		}
+
+		for (int row = 1; row < max; row++) {
+			for (int col = 0; col < row; col++) {
+				left = pixels[row][col];
+				right = pixels[col][row];
+				right.setColor(left.getColor());
 			}
 		}
 
-		for (int row = 160; row < 200; row++) {
-			for (int col = 240; col < 300; col++) {
-				top = pixels[row][col];
-				bottom = pixels[row][col];
-				top.setColor((top.getColor()));
-			}
-		}
+	}
 
+	public void mirrorArms() {
+		Pixel topPixel = null;
+	   Pixel botPixel = null;
+	   Pixel[][] pixels = this.getPixels2D();
+
+	   for (int row = 150; row < 200; row++) {
+		   for (int col = 100; col < 170; col++) {
+			   topPixel = pixels[row][col];
+			   botPixel = pixels[200-row+200][col];
+			   botPixel.setColor(topPixel.getColor());
+		   }	
+	   }
+
+	   for (int row = 150; row < 200; row++) {
+		   for (int col = 240; col < 300; col++) {
+			   topPixel = pixels[row][col];
+			   botPixel = pixels[200-row+200][col];
+			   botPixel.setColor(topPixel.getColor());
+		   }
+	   }
 	}
 
 	public void mirrorGull() {
-		int mirrorPic = 350;
-		
-		Pixel left = null;
-		Pixel right = null;
+		int mirrorPoint = 350;
+		Pixel leftPixel = null;
+		Pixel rightPixel = null;
 		Pixel[][] pixels = this.getPixels2D();
-
-		for (int row = 225; row < 330; row++) {
-			for (int col = 100; col < 170; col++) {
-				left = pixels[row][col];
-				right = pixels[row][mirrorPic - col + mirrorPic];
-				right.setColor((left.getColor()));
-			}
+	
+	 	for (int row = 225; row < 330; row++) {
+	 		for (int col = 220; col < mirrorPoint; col++) {
+				leftPixel = pixels[row][col];
+				rightPixel = pixels[row][mirrorPoint - col +
+				mirrorPoint];
+				rightPixel.setColor(leftPixel.getColor());
+	 		}	
 		}
+		 // this one is interesting because even
+		// though it mirrored only the seagull,
+		// the light color from the left side of the
+		// picture tranfered over to the right side as well.
 	}
+	
 
 	/*
 	 * Main method for testing - each class in Java can have a main method
