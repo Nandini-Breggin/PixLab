@@ -209,9 +209,9 @@ public class Picture extends SimplePicture {
 		flower1.mirrorVertical();
 		caterpillar.mirrorHorizontalBottomtoTop();
 
-		this.copy( caterpillar, 0, 0 );
-		this.copy( flower1, 100, 0 );
-		this.copy( caterpillar, 200, 0 );
+		this.copy(caterpillar, 0, 0);
+		this.copy(flower1, 100, 0);
+		this.copy(caterpillar, 200, 0);
 		this.mirrorHorizontal();
 		this.mirrorVertical();
 	}
@@ -236,6 +236,48 @@ public class Picture extends SimplePicture {
 					leftPixel.setColor(Color.BLACK);
 				else
 					leftPixel.setColor(Color.WHITE);
+			}
+		}
+	}
+
+	public void edgeDetection2 (int edgeDist) {
+		Pixel topPixel = null;
+		Pixel bottomPixel = null;
+		Pixel[][] pixels = this.getPixels2D();
+		Color bottomColor = null;
+
+		for (int row = 0; row < pixels.length - 1; row++) {
+			for (int col = 0; col < pixels[0].length; col++) {
+				topPixel = pixels[row][col];
+				bottomPixel = pixels[row][col + 1];
+				bottomColor = bottomPixel.getColor();
+
+				if (topPixel.colorDistance(bottomColor) > edgeDist) {
+					topPixel.setColor(Color.BLACK);
+				} else {
+					topPixel.setColor(Color.WHITE);
+				}
+				
+			}
+		}
+	}
+
+	public void edgeDetection3(int edgeDist) {
+		Pixel top = null;
+		Pixel bottom = null;
+		Pixel[][] pixels = this.getPixels2D();
+		Color bottomcolor = null;
+		for (int row = 0; row < pixels.length-1; row++) {
+			for (int col = 0; col < pixels[0].length-1; col++) {
+				top = pixels[row][col];
+				bottom = pixels[row+1][col+1];
+				bottomcolor = bottom.getColor();
+
+				if (top.colorDistance(bottomcolor) > edgeDist) {
+					top.setColor(Color.BLACK);
+				} else {
+					top.setColor(Color.WHITE);
+				}
 			}
 		}
 	}
