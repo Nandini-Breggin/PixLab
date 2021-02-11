@@ -77,34 +77,41 @@ public class PictureTester
   }
 
   public static void testMirrorHorizontal() {
-    Picture beach = new Picture("swan.jpg");
+    Picture beach = new Picture("beach.jpg");
     beach.explore();
     beach.mirrorHorizontal();
     beach.explore();
   }
 
   public static void testMirrorHorizontalBottomtoTop() {
-    Picture beach = new Picture("swan.jpg");
+    Picture beach = new Picture("beach.jpg");
     beach.explore();
     beach.mirrorHorizontal();
     beach.explore();
   }
 
+  public static void testMirrorVerticalRightToLeft() {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.mirrorVerticalRightToLeft();
+    beach.explore();
+  }
+
   public static void testMirrorArms() {
 
-    Picture beach = new Picture("snowman.jpg");
-    beach.explore();
-    beach.mirrorArms();
-    beach.explore();
+    Picture snowman = new Picture("snowman.jpg");
+    snowman.explore();
+    snowman.mirrorArms();
+    snowman.explore();
 
   }
 
   public static void testMirrorGull() {
 
-    Picture beach = new Picture("seagull.jpg");
-    beach.explore();
-    beach.mirrorGull();
-    beach.explore();
+    Picture seagull = new Picture("seagull.jpg");
+    seagull.explore();
+    seagull.mirrorGull();
+    seagull.explore();
 
   }
 
@@ -125,7 +132,7 @@ public class PictureTester
     // testGrayscale();
     // testFixUnderwater();
     // testMirrorVertical();
-    // testMirrorVerticalRighttoLeft();
+    // testMirrorVerticalRightToLeft();
     // testMirrorHorizontal();
     // testMirrorHorizontalBottomtoTop();
     // testMirrorTemple();
